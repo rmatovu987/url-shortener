@@ -1,0 +1,5 @@
+.act-container{
+    margin-top: 56px;
+  height: calc(100vh - 56px);  
+  background: #e6e9ec !important;
+}
