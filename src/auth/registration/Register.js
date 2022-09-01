@@ -4,7 +4,7 @@ import axios from "axios";
 import { Toast, ToastContainer } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 
-import './../login/Login.css';
+import "./../login/Login.css";
 
 export default function Register() {
   const [firstname, setFirstname] = useState("");
@@ -40,31 +40,31 @@ export default function Register() {
       })
       .catch((err) => {
         setError(true);
-        setMessage(prev => [...prev, ...err.response.data.errors]);
+        setMessage((prev) => [...prev, ...err.response.data.errors]);
       });
   };
 
   const clearData = () => {
-
-    if(register){
-      navigate('/login')
+    if (register) {
+      navigate("/login");
       setEmail("");
       setPassword("");
       setFirstname("");
-      setLastname("");   
+      setLastname("");
     }
-    
+
     setRegister(false);
     setError(false);
     setMessage("");
-    
   };
 
-  function renderErrors(){
-    const errors = []
+  function renderErrors() {
+    const errors = [];
 
-    for(const err of message){
-      errors.push(<li className="text-white">{err}</li>);
+    if (error) {
+      for (const err of message) {
+        errors.push(<li className="text-white">{err}</li>);
+      }
     }
 
     return errors;
@@ -85,9 +85,7 @@ export default function Register() {
           <div className="box-text col-6 px-4 py-auto">
             <h2 className="text-primary">Register</h2>
             <p className="mb-2" style={{ fontSize: "13px" }}>
-              <em>
-                Register to view your activity and create new URLs.
-              </em>
+              <em>Register to view your activity and create new URLs.</em>
             </p>
             <form onSubmit={(e) => handleSubmit(e)}>
               {/** First name */}
@@ -156,8 +154,11 @@ export default function Register() {
               {/** Forgot password */}
               <div className="d-flex justify-content-center">
                 <p className="forgot-password text-right">
-                  Already registered? <Link to={"/login"} style={{textDecoration: 'none'}}>Login</Link>
-                </p>               
+                  Already registered?{" "}
+                  <Link to={"/login"} style={{ textDecoration: "none" }}>
+                    Login
+                  </Link>
+                </p>
               </div>
             </form>
           </div>
@@ -184,9 +185,7 @@ export default function Register() {
             <small>1 sec ago</small>
           </Toast.Header>
           <Toast.Body>
-          <ol>
-              {renderErrors()}
-            </ol>
+            <ol>{renderErrors()}</ol>
           </Toast.Body>
         </Toast>
 

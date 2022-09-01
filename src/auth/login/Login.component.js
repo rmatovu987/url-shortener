@@ -6,8 +6,7 @@ import "./Login.css";
 
 import { Toast, ToastContainer } from "react-bootstrap";
 
-export default function Login( props ) {
-  
+export default function Login(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [login, setLogin] = useState(false);
@@ -32,10 +31,11 @@ export default function Login( props ) {
 
     axios(configuration)
       .then((result) => {
+        console.log(result)
         setLogin(true);
         setMessage(result.data.message);
-        sessionStorage.setItem("url_token", result.data.token);       
-        props.onChange(true)
+        sessionStorage.setItem("url_token", result.data.token);
+        props.onChange(true);
       })
       .catch((err) => {
         setError(true);
@@ -44,11 +44,11 @@ export default function Login( props ) {
   };
 
   const clearData = () => {
-    if(login){
-      navigate('/activity')
+    if (login) {
+      navigate("/activity");
       setEmail("");
       setPassword("");
-    }    
+    }
     setLogin(false);
     setError(false);
     setMessage("");
@@ -57,10 +57,11 @@ export default function Login( props ) {
   function renderErrors() {
     const errors = [];
 
-    for (const err of message) {
-      errors.push(<li className="text-white">{err}</li>);
+    if (error) {
+      for (const err of message) {
+        errors.push(<li className="text-white">{err}</li>);
+      }
     }
-
     return errors;
   }
 
